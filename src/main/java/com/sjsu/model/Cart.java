@@ -1,34 +1,40 @@
 package com.sjsu.model;
 
 import java.util.Arrays;
-/**
- * Represents a shopping cart for each user. It is associated with User Session in
- * a UserRequest Object.
- * 
- * @author navdeepdahiya
- *
- */
+import java.util.LinkedList;
+import java.util.List;
+
 public class Cart {
 	/*
 	 * List of items in the cart.
 	 */
-	private Item [] items;
+	private List<CartItem> itemList;
 
 	public Cart() {
-		super();
+		itemList = new LinkedList<CartItem>();
 	}
 
-	public Item[] getItems() {
-		return items;
+	public List<CartItem> getItemList() {
+		return itemList;
 	}
 
-	public void setItems(Item[] items) {
-		this.items = items;
+	public void setItemList(List<CartItem> itemList) {
+		this.itemList = itemList;
 	}
 
 	@Override
 	public String toString() {
-		return "Cart [items=" + Arrays.toString(items) + "]";
+		StringBuilder str = new StringBuilder();
+		str.append("Cart [items=");
+		for (int i = 0; i < itemList.size(); i++) {
+			CartItem c = itemList.get(i);
+			str.append(c.toString());
+			if (i < itemList.size() - 1) {
+				str.append(",");
+			}
+		}
+		str.append("]");
+		return str.toString();
 	}
-	
+
 }

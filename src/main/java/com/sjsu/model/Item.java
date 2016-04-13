@@ -2,8 +2,8 @@ package com.sjsu.model;
 
 public class Item {
 
-	private String itemName;
-	private String itemID;
+	private String name;
+	private String id;
 	private String desc;
 	private Float itemPrice;
 	private int quantity;
@@ -12,20 +12,20 @@ public class Item {
 		super();
 	}
 
-	public String getItemName() {
-		return itemName;
+	public String getName() {
+		return name;
 	}
 
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getItemID() {
-		return itemID;
+	public String getId() {
+		return id;
 	}
 
-	public void setItemID(String itemID) {
-		this.itemID = itemID;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getDesc() {
@@ -54,9 +54,9 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [itemName=" + itemName + ", itemID=" + itemID + ", desc=" + desc + ", itemPrice=" + itemPrice
-				+ ", quantity=" + quantity + "]";
+		return "Item [itemName=" + name + ", itemID=" + id + ", desc="
+				+ desc + ", itemPrice=" + itemPrice + ", quantity=" + quantity
+				+ "]";
 	}
 
-	
 }
