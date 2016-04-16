@@ -1,4 +1,4 @@
-package com.sjsu.service.login;
+package com.sjsu.login.service;
 
 /**
  * Service for login operations
