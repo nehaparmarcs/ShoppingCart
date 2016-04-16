@@ -30,6 +30,10 @@
 		session.setAttribute(name, value); //setting items for this session only
 		}
 	</jsp:scriptlet>
+	
+	 <img src="images/add_to_cart.PNG" onclick="document.location='addToCart.jsp'">
+<img src="images/remove_from_cart.PNG" onclick="document.location='removeItem.jsp'">
+<img src="images/view_cart.PNG" onclick="document.location='cart.jsp'"> 
 	<!-- creating a form and directing the action to the same jsp page -->
 	
 	<form method="get" action="addToCart.jsp">
