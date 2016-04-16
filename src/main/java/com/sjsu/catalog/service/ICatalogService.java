@@ -1,4 +1,4 @@
-package com.sjsu.service.catalogue;
+package com.sjsu.catalog.service;
 
 import com.sjsu.model.Item;
 import com.sjsu.model.UserRequest;
