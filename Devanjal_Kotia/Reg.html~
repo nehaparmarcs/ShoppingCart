@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Shopping Cart Registration</title>
 </head>
-<body background="./images/photo_bg.jpg">
+<body>
 <form action="reg.jsp" method="post">
 
 User name :<input type="text" name="userid" /><br/><br/>
