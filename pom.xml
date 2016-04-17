@@ -13,6 +13,7 @@
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<slf4j.version>1.6.4</slf4j.version>
 		<junit.version>4.8.1</junit.version>
+		<tiles.version>2.2.1</tiles.version>
 	</properties>
  
  <build>
@@ -117,7 +118,28 @@
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
- 
+ 	
+ 	
+ 	<dependency>
+	<groupId>org.apache.tiles</groupId>
+	<artifactId>tiles-jsp</artifactId>
+	<version>${tiles.version}</version>
+</dependency>
+<dependency>
+	<groupId>org.apache.tiles</groupId>
+	<artifactId>tiles-servlet</artifactId>
+	<version>${tiles.version}</version>
+</dependency>	
+<dependency>
+	<groupId>org.apache.tiles</groupId>
+	<artifactId>tiles-template</artifactId>
+	<version>${tiles.version}</version>
+</dependency>	
+<dependency>
+	<groupId>org.apache.tiles</groupId>
+	<artifactId>tiles-el</artifactId>
+	<version>${tiles.version}</version>
+</dependency>
 
 	</dependencies>
  
