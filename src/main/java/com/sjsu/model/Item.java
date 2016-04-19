@@ -5,7 +5,7 @@ public class Item {
 	private String name;
 	private String id;
 	private String desc;
-	private Float itemPrice;
+	private double itemPrice;
 	private int quantity;
 
 	public Item() {
@@ -36,11 +36,11 @@ public class Item {
 		this.desc = desc;
 	}
 
-	public Float getItemPrice() {
+	public double getItemPrice() {
 		return itemPrice;
 	}
 
-	public void setItemPrice(Float itemPrice) {
+	public void setItemPrice(double itemPrice) {
 		this.itemPrice = itemPrice;
 	}
 
