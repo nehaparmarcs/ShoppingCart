@@ -29,73 +29,57 @@ public class CartManager implements ShoppingCartConstant {
 	}
 
 	/*
-	 * add an item to the user's cart. userType is refered to USER_TYPE in
-	 * ShoppingCartConstant
+	 * Store a cart. userType is refered to USER_TYPE in ShoppingCartConstant
 	 */
-	public Cart addCartItem(String userId, int userType, CartItem item) {
+	public void storeCart(int userType, Cart cart) {
 		if (userType == ANONYMOUS_USER_TYPE) {
-			return addAnonymousCartItem(userId, item);
+			addAnonymousCart(cart);
 		} else {
-			return db.addCartItem(userId, item);
+			db.storeCart(cart);
 		}
 	}
 
 	/*
-	 * delete an item in user's cart. userType is refered to USER_TYPE in
-	 * ShoppingCartConstant
+	 * delete a cart. userType is refered to USER_TYPE in ShoppingCartConstant
 	 */
-	public Cart deleteCartItem(String userId, int userType, CartItem item) {
+	public void deleteCart(String userId, int userType) {
 		if (userType == ANONYMOUS_USER_TYPE) {
-			return deleteAnonymousCartItem(userId, item);
+			deleteAnonymousCart(userId);
 		} else {
-			return db.deleteCartItem(userId, item);
+			db.deleteCart(userId);
 		}
 	}
 
-	private Cart deleteAnonymousCartItem(String userId, CartItem item) {
+	private void deleteAnonymousCart(String userId) {
 		// TODO Auto-generated method stub
-		Cart cart = anonymousCartMap.get(userId);
-		if (cart == null) {
-			// print error log
-		} else {
-			doDeleteItem(cart, item);
-		}
-		return cart;
+		anonymousCartMap.remove(userId);
 	}
 
-	private Cart addAnonymousCartItem(String userId, CartItem item) {
+	private void addAnonymousCart(Cart cart) {
 		// TODO Auto-generated method stub
-		Cart cart = anonymousCartMap.get(userId);
-		if (cart == null) {
-			cart = new Cart();
-			doAddItem(cart, item);
-			anonymousCartMap.put(userId, cart);
-		} else {
-			doAddItem(cart, item);
-		}
-		return cart;
+		anonymousCartMap.put(cart.getUserId(), cart);
 	}
 
-	private void doAddItem(Cart cart, CartItem item) {
-		List<CartItem> items = cart.getItemList();
-		for (CartItem i : items) {
-			if (i.getId().equals(item.getId())) {
-				i.setQuantity(i.getQuantity() + 1);
-				return;
-			}
-		}
-		items.add(item);
-	}
+	// private void doAddItem(Cart cart, CartItem item) {
+	// List<CartItem> items = cart.getItemList();
+	// for (CartItem i : items) {
+	// if (i.getId().equals(item.getId())) {
+	// i.setQuantity(i.getQuantity() + 1);
+	// return;
+	// }
+	// }
+	// items.add(item);
+	// }
 
-	private void doDeleteItem(Cart cart, CartItem item) {
-		// TODO Auto-generated method stub
-		List<CartItem> itemList = cart.getItemList();
-		for (int i = 0; i < itemList.size(); i++) {
-			CartItem cartItem = itemList.get(i);
-			if (cartItem.getId().equals(item.getId())) {
-				itemList.remove(i);
-				return;
-			}
-		}
-	}
+	// private void doDeleteItem(Cart cart, CartItem item) {
+	// // TODO Auto-generated method stub
+	// List<CartItem> itemList = cart.getItemList();
+	// for (int i = 0; i < itemList.size(); i++) {
+	// CartItem cartItem = itemList.get(i);
+	// if (cartItem.getId().equals(item.getId())) {
+	// itemList.remove(i);
+	// return;
+	// }
+	// }
+	// }
 }

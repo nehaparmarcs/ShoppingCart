@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Cart {
+	String userId;
 	/*
 	 * List of items in the cart.
 	 */
@@ -20,6 +21,16 @@ public class Cart {
 
 	public void setItemList(List<CartItem> itemList) {
 		this.itemList = itemList;
+	}
+	
+	
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	@Override
