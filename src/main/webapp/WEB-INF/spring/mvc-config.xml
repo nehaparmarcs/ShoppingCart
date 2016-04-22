@@ -9,6 +9,7 @@
 
 	<!-- Sets up standard HandlerMapping and HanderAdapter for use with annotations.
 	     Allows customization of various MVC-related aspects like binding and validation. -->
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 	<mvc:annotation-driven />
 	
 	 <context:component-scan base-package="com.sjsu.controller" />
