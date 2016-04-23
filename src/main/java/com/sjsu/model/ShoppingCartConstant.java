@@ -13,5 +13,6 @@ public interface ShoppingCartConstant {
 	public static final String SUCCESS = "success";
 	public static final String FAILURE = "Failure";
 	public static final String ERROR_PAGE = "/jsp/errorPage.jsp";
+	public static final String ADMIN_USER = "adm";
 	
 }
