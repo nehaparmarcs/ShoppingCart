@@ -12,10 +12,17 @@ public class Item  extends CouchDbDocument {
 	@TypeDiscriminator
 	private String itemID;
 	private String desc;
+	private String imgPath;
 	private Float itemPrice;
 	private int quantity;
 	
 	
+	public String getImgPath() {
+		return imgPath;
+	}
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
 	public String getName() {
 		return name;
 	}

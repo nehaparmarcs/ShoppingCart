@@ -1,11 +1,14 @@
 package com.sjsu.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.ektorp.PageRequest;
 import org.ektorp.UpdateConflictException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sjsu.couch.model.Item;
 import com.sjsu.couch.repository.CatalogRepository;
+import com.sjsu.model.UserRequest;
 
 public class ShopController {
 	
@@ -81,6 +85,17 @@ public class ShopController {
 	*/
 	// -- ND
 	
+	@RequestMapping(value="search")
+    public String search(@ModelAttribute("userRequest")UserRequest userRequest, Model model,
+   		   BindingResult result) {
+		
+		Map modelMap = model.asMap();
+		//Obtains all the Item elements from couch db
+		model.addAttribute("items",catalogRepo.getAll());
+		
+		return "search";
+		
+	}
 	
 	
 	

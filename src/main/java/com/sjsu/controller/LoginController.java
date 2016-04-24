@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sjsu.dao.login.LoginDAO;
 import com.sjsu.login.service.impl.LoginServiceImpl;
+import com.sjsu.model.UserRequest;
 
 @Controller
 public class LoginController {
@@ -57,7 +58,7 @@ public class LoginController {
 			success = LoginServiceImpl.selectRecordFromDb(user.getName(),user.getPassword());
 			if(success) {
 				
-				return new ModelAndView("welcome");
+				return new ModelAndView("search", "userRequest", new UserRequest());
 				
 			}
 			else {
