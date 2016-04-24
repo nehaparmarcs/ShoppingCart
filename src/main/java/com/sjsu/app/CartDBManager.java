@@ -14,8 +14,7 @@ import com.basho.riak.client.api.commands.kv.FetchValue;
 import com.basho.riak.client.api.commands.kv.StoreValue;
 import com.basho.riak.client.core.query.Location;
 import com.basho.riak.client.core.query.Namespace;
-import com.sjsu.model.Cart;
-import com.sjsu.model.CartItem;
+import com.sjsu.model.*;
 
 public class CartDBManager {
 
@@ -65,7 +64,7 @@ public class CartDBManager {
 				}
 			}
 
-			database = prop.getProperty("database");
+			database = prop.getProperty("cart_database");
 			System.out.println("database = " + database);
 			port = Integer.parseInt(prop.getProperty("port"));
 			System.out.println("port = " + port);
@@ -92,18 +91,21 @@ public class CartDBManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Response get Cart, userId: " + userId + " cart: " + (cart==null ? "null" : cart.toString()));
+		System.out.println("Response get Cart, userId: " + userId + " cart: "
+				+ (cart == null ? "null" : cart.toString()));
 		return cart;
 	}
 
 	public void storeCart(Cart cart) {
 		System.out.println("Request store Cart, userId: " + cart.getUserId());
-		Location location = new Location(new Namespace(database), cart.getUserId());
+		Location location = new Location(new Namespace(database),
+				cart.getUserId());
 		StoreValue sv = new StoreValue.Builder(cart).withLocation(location)
 				.build();
 		try {
 			StoreValue.Response svResponse = riak.execute(sv);
-			System.out.println("Response store Cart, userId: " + cart.getUserId() + " svResponse: " + svResponse);
+			System.out.println("Response store Cart, userId: "
+					+ cart.getUserId() + " svResponse: " + svResponse);
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,7 +113,7 @@ public class CartDBManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public void deleteCart(String userId) {
@@ -130,5 +132,63 @@ public class CartDBManager {
 
 	}
 
-}
+	public Cart addCartItem(String userId, CartItem item) {
+		System.out.println("Request add CartItem, userId: " + userId);
+		Cart cart = null;
+		// get the Cart from DB
+		cart = getCart(userId);
+		if (cart == null) {
+			cart = new Cart();
+			cart.setUserId(userId);
+		}
+		System.out.println("Cart in DB before update, userId: " + userId
+				+ " Cart: " + cart.toString());
+		List<CartItem> dbItems = cart.getItemList();
 
+		boolean isContain = false;
+		for (CartItem dbItem : dbItems) {
+			if (item.getId().equals(dbItem.getId())) {
+				isContain = true;
+				dbItem.setQuantity(dbItem.getQuantity() + item.getQuantity());
+			}
+		}
+		if (!isContain) {
+			dbItems.add(item);
+		}
+
+		// store the Cart to DB again
+		storeCart(cart);
+		System.out.println("Cart in DB after update, userId: " + userId
+				+ " Cart: " + cart.toString());
+		return cart;
+	}
+
+	public Cart releaseCartItem(String userId, CartItem item) {
+		System.out.println("Request release CartItem, userId: " + userId);
+		Cart cart = null;
+		// get the Cart from DB
+		cart = getCart(userId);
+		if (cart == null) {
+			System.out.println("ERROR: remove item in an empty Cart!!!");
+			return cart;
+		}
+		System.out.println("Cart in DB before update, userId: " + userId
+				+ " Cart: " + cart.toString());
+		List<CartItem> dbItems = cart.getItemList();
+		for (CartItem dbItem : dbItems) {
+			if (item.getId().equals(dbItem.getId())) {
+				dbItem.setQuantity(dbItem.getQuantity() - item.getQuantity());
+				if (dbItem.getQuantity() <= 0) {
+					dbItems.remove(dbItem);
+				}
+				break;
+			}
+		}
+		// store the Cart to DB again
+		storeCart(cart);
+		System.out.println("Cart in DB after update, userId: " + userId
+				+ " Cart: " + cart.toString());
+		return cart;
+	}
+
+}
