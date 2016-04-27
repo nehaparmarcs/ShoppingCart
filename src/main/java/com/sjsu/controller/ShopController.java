@@ -49,11 +49,11 @@ public class ShopController {
 	
 	@RequestMapping( value = "newItem", method = RequestMethod.GET)
 	public ModelAndView newPost() {
-		return new ModelAndView("newItem", "command", new Item());
+		return new ModelAndView("addItem", "item", new Item());
 	}
 	
 	@RequestMapping( value = "addItem", method = RequestMethod.POST)
-	public String submitPost(@ModelAttribute("command") Item item) {
+	public String submitPost(@ModelAttribute("item") Item item) {
 		if (item.isNew()) {
 			item.setId(createId(item.getItemID()));
 			catalogRepo.add(item);
