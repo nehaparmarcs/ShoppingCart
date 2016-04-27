@@ -1,43 +1,53 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<!DOCTYPE html >
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Example</title>
-    </head> 
-    <body>
-    <form:form action="login1" commandName="user" method="POST"> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Login</title>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+</head>
+<body>
+	<section>
+		<div class="jumbotron">
+			<div class="container">
+				<h2>Login Page for Shopping Cart Application</h2>
+			</div>
+		</div>
+	</section>
 
-            <center>
-            <table border="0" width="30%" cellpadding="3">
-                <thead>
-                    <tr>
-                        <th colspan="2">Login Here</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>User Name:</td>
-                        <td><form:input path="name" ></form:input>
-        </td>
-                    </tr>
-                    <tr>
-                        <td>Password:</td>
-                        <td><form:input path="password"  ></form:input>
-        </td></td>
-                    </tr>
-                    <tr>
-                        <td><input type="submit" value="Login" /></td>
-                        <td><input type="reset" value="Reset" /></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">Yet Not Registered!! <a href="reg.jsp">Register Here</a></td>
-                    </tr>
-                </tbody>
-            </table>
-            </center>
-       </form:form>
-    </body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Please sign in</h3>
+					</div>
+					<div class="panel-body">
+						<form action="login1" method="post">
+							<fieldset>
+								<div class="form-group">
+									<input class="form-control" placeholder="User Name"
+										name='name' type="text">
+								</div>
+
+								<div class="form-group">
+									<input class="form-control" placeholder="Password" name='password' type="password" value="">
+								</div>
+
+								<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 </html>
