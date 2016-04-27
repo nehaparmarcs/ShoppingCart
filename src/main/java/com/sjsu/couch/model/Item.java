@@ -17,6 +17,20 @@ public class Item  extends CouchDbDocument {
 	private int quantity;
 	
 	
+	
+	public Item(String name, String itemID, String desc, String imgPath, Float itemPrice, int quantity) {
+		super();
+		this.name = name;
+		this.itemID = itemID;
+		this.desc = desc;
+		this.imgPath = imgPath;
+		this.itemPrice = itemPrice;
+		this.quantity = quantity;
+	}
+	public Item() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public String getImgPath() {
 		return imgPath;
 	}

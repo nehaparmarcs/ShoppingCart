@@ -5,6 +5,8 @@ package com.sjsu.controller;
  */
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sjsu.couch.model.Item;
 import com.sjsu.dao.login.LoginDAO;
 import com.sjsu.login.service.impl.LoginServiceImpl;
 import com.sjsu.model.UserRequest;
@@ -39,7 +42,7 @@ public class LoginController {
    		   BindingResult result) {
 		System.out.println(user);
 		boolean success = false;
-		
+		ModelAndView model = new ModelAndView("search");
 		
 		try {
 			/*success = LoginServiceImpl.insertRecordIntoDbUserTable(user);
@@ -57,8 +60,8 @@ public class LoginController {
 			
 			success = LoginServiceImpl.selectRecordFromDb(user.getName(),user.getPassword());
 			if(success) {
-				
-				return new ModelAndView("search", "userRequest", new UserRequest());
+				model.addObject("items", getItemList());
+				return model;
 				
 			}
 			else {
@@ -73,6 +76,16 @@ public class LoginController {
 		
 		return null;
     }
+	
+	
+	public List<Item> getItemList(){
+		List<Item> items = new ArrayList<Item>();
+		
+		items.add(new Item("T-shirt", "shirt-id", "Its a big tee", "imgPath", (float) 7.0,8));
+		items.add(new Item("Reebok Tee", "rbkId1", "Play Dry", "imgPath", (float) 700.0,100));
+		items.add(new Item("Another Reebok tee", "rb2", "Paly Ice", "imgPath", (float) 300.0,50));
+		return items;
+	}
 	
 	
 	/*
