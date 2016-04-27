@@ -21,6 +21,26 @@
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
+        <script type="text/javascript"
+    src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+    function checkAvailability() {
+        $.ajax({
+            url : 'checkAvailability',
+            success : function(data) {
+                $('#responseDiv').html(data);
+            }
+        });
+    }
+    function autocomplete() {
+        $.ajax({
+            url : 'autocomplete',
+            success : function(data) {
+                $('#responseDiv').html(data);
+            }
+        });
+    }
+</script>
         <button type="submit" class="btn btn-default">Search Catalog</button>
       </form>
 
