@@ -1,0 +1,26 @@
+#intro {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;	 
+}
+#sel {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:500px;
+    width:210px;
+    float:left;
+    padding:5px;
+}
+
+#criterialForm {
+        width: 200px;
+}
+
+#fo {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;	 	 
+}
