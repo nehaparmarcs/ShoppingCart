@@ -1,5 +1,8 @@
 package com.sjsu.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sjsu.couch.model.Item;
 import com.sjsu.couch.repository.CatalogRepository;
+import com.sjsu.dao.login.LoginDAO;
+import com.sjsu.login.service.impl.LoginServiceImpl;
 import com.sjsu.model.UserRequest;
 
 public class ShopController {
@@ -70,6 +75,97 @@ public class ShopController {
 	private String createId(String itemID) {
 		return itemID.replaceAll("\\s", "-");
 	}
+	
+	// get item
+	
+	@RequestMapping( value = "getItem")
+	 public ModelAndView getItem() {
+		//System.out.println(user);
+		
+		ModelAndView modelandView 
+        = new ModelAndView("getItem", "item", new Item());
+		
+		return modelandView;
+
+
+     }
+	
+	@RequestMapping( value = "getItem1")
+	public ModelAndView getItem1(@ModelAttribute("item")Item item,
+	   		   BindingResult result) {
+		
+			System.out.println(item);
+			boolean success = false;
+			ModelAndView model = new ModelAndView("detail");
+			
+			try {
+				
+				//success = LoginServiceImpl.selectRecordFromDb(item.getItemID());
+				
+				if(success) {
+					model.addObject("item", getItems());
+					return model;
+					
+				}
+				else {
+				    return new ModelAndView("errorPage");
+				
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			return null;
+	    }
+	
+	public Item getItems(){
+	//Mock data for Details page.	
+	 return	new Item("T-shirt", "shirt-id", "Its a big tee", "imgPath", (float) 7.0,8);
+	
+	}
+	
+	// delete item
+	@RequestMapping( value = "deleteItem")
+	 public ModelAndView deleteItem() {
+		
+		ModelAndView modelandView 
+       = new ModelAndView("deleteItem", "delItem", new Item());
+		
+		return modelandView;
+
+
+    }
+	
+	@RequestMapping( value = "getItem1")
+	public ModelAndView deleteItem1(@ModelAttribute("delItem")Item delItem,
+	   		   BindingResult result) {
+		LoginController cont = new LoginController();
+			System.out.println(delItem);
+			boolean success = false;
+			ModelAndView model = new ModelAndView("search");
+			
+			try {
+				
+				success = LoginServiceImpl.selectRecordFromDb(delItem.getItemID());
+				if(success) {
+					model.addObject("items", cont.getItemList());
+					return model;
+					
+				}
+				else {
+				    return new ModelAndView("errorPage");
+				
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+			return null;
+	    }
 /*
 	@RequestMapping("/browse/{itemId}")
 	public ModelAndView viewPost(@PathVariable("itemId") String itemId) {

@@ -15,6 +15,7 @@ public class Item  extends CouchDbDocument {
 	private String imgPath;
 	private Float itemPrice;
 	private int quantity;
+	private String category;
 	
 	
 	
@@ -29,7 +30,6 @@ public class Item  extends CouchDbDocument {
 	}
 	public Item() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public String getImgPath() {
 		return imgPath;
@@ -66,6 +66,22 @@ public class Item  extends CouchDbDocument {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Item [name=" + name + ", itemID=" + itemID + ", desc=" + desc + ", imgPath=" + imgPath + ", itemPrice="
+				+ itemPrice + ", quantity=" + quantity + ", category=" + category + "]";
 	}
 	
 	@Override
