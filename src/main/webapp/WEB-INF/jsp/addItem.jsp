@@ -41,45 +41,40 @@
 <h1>Add New Item</h1>
 
 
-<form:form modelAttribute="item" enctype="multipart/form-data"  method="POST" action="addItem">
+<form:form modelAttribute="item"  method="POST" action="addItem">
 	<table>
 	
 		
 		<tr>
-			<td><form:label path="itemName">Item Category:</form:label></td>
+			<td><form:label path="category">Category:</form:label></td>
 			<td><form:input path="category"/></td>
 		</tr>
 		
 		<tr>
-			<td><form:label path="itemId"></form:label></td>
-			<td><form:input path="itemId" type="hidden"/></td>
-		</tr>
-
-		<tr>
-			<td><form:label path="itemId">ItemID:</form:label></td>
-			<td><form:input path="itemId"/></td>
+			<td><form:label path="itemID">Item ID:</form:label></td>
+			<td><form:input path="itemID"/></td>
 		</tr>
 		
 		<tr>
-			<td><form:label path="itemName">Item Name:</form:label></td>
-			<td><form:input path="itemName"/></td>
+			<td><form:label path="name">Item Name:</form:label></td>
+			<td><form:input path="name"/></td>
 		</tr>
 		<tr>
-			<td><form:label path="itemPrice">Item Price:</form:label></td>
-			<td><form:input path="itemPrice"/></td>
+			<td><form:label path="quantity">Quantity:</form:label></td>
+			<td><form:input path="quantity"/></td>
 		</tr>
 		<tr>
-			<td><form:label path="itemContent">Item Content:</form:label></td>
-			<td><form:input path="itemContent"/></td>
+			<td><form:label path="desc">Item Content:</form:label></td>
+			<td><form:input path="desc"/></td>
 		</tr>
 		<tr>
-        <td><form:label path="itemImage">Item Image</form:label></td>
-        <td><input type="file" name="file" id="file"></input></td>
+        <td><form:label path="imgPath">Item Image</form:label></td>
+        <td><form:input path="imgPath"/></td>
     	</tr>
 		
 	</table>
 	
-	<input type="submit" value="Save" />
+	<input type="submit" value="Add Item" />
 </form:form>
 </div>
 </center>

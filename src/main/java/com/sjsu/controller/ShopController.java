@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.ektorp.PageRequest;
 import org.ektorp.UpdateConflictException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,6 +27,7 @@ import com.sjsu.dao.login.LoginDAO;
 import com.sjsu.login.service.impl.LoginServiceImpl;
 import com.sjsu.model.UserRequest;
 
+@Controller
 public class ShopController {
 	
 	@Autowired
@@ -50,17 +52,13 @@ public class ShopController {
 	}
 	
 	
-	
-	// ++ ND
-	
-	
 	@RequestMapping( value = "newItem", method = RequestMethod.GET)
 	public ModelAndView newPost(@ModelAttribute("item")Item item) {
 		return new ModelAndView("addItem", "item", new Item());
 	}
 	
 	@RequestMapping( value = "addItem", method = RequestMethod.POST)
-	public String submitPost(@ModelAttribute("item") Item item) {
+	public ModelAndView submitPost(@ModelAttribute("item") Item item) {
 		if (item.isNew()) {
 			item.setId(createId(item.getItemID()));
 			catalogRepo.add(item);
@@ -68,7 +66,8 @@ public class ShopController {
 			catalogRepo.update(item);	
 		}
 		
-		return "newItem";
+		return new ModelAndView("addItem", "item", new Item());
+		
 	}
 	
 	@ExceptionHandler(UpdateConflictException.class)
