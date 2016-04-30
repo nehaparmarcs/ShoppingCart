@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Product Details</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<style>
+	
+		.navbar-brand{
+			font-size:1.8em;
+		}
+		.marginTop{
+			margin-top:-20px;
+			padding:0;
+		}
+		.center{
+			text-align:center;
+		}
+		.bold{
+			font-weight:bold;
+		}
+		#bgColor{
+			background-color:#190a0a;
+		}
+	
+	</style>
+  </head>
+  <body>
+  
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Shopping Cart Application</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="login">Login <span class="sr-only">(current)</span></a></li>
+		<li><a href="login">Register<span class="sr-only">(current)</span></a></li>
+      </ul>
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <script type="text/javascript"
+    src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+    function checkAvailability() {
+        $.ajax({
+            url : 'checkAvailability',
+            success : function(data) {
+                $('#responseDiv').html(data);
+            }
+        });
+    }
+    function autocomplete() {
+        $.ajax({
+            url : 'autocomplete',
+            success : function(data) {
+                $('#responseDiv').html(data);
+            }
+        });
+    }
+</script>
+        <button type="submit" class="btn btn-default">Search Catalog</button>
+      </form>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+	
+	<div class="container">
+	
+		<div class="row marginTop">
+		
+			<div class="col-md-6 marginTop">
+				<h2 class="center"> <span class="glyphicon glyphicon-fire"></span>Flambo Jacket</h2>
+				<img src="images/jacket_600X600.jpg" />
+				<p class="center bold"></p>
+				
+				
+			</div>
+		<!--	<div class="row marginTop"> -->
+				<div class="col-md-4 marginTop">
+						<h1>Flambo jacket</h1>
+						<h2>Details</h2>
+					<p>This offered product is of the highest quality made with genuine leather and microfiber. The Dual coating inside keeps you warm and 
+					the hypoallergenic material saves your skin. It is washable and the color stays on forever.</p>	
+					<h3> List Price: $99</h3>
+					<p><a href="#" class="btn btn-primary" role="button">View More Details</a><a href="#" class="btn btn-success" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a> </p>
+				</div>
+				
+		<!-- </div> -->
+			
+		
+		</div>
+		
+	
+	</div>
+	
+	<div id="footer">
+        <p style="text-align:center">&copy; 2016 <a href="">Contact Us</a> Online Shopping cart application.</p>
+    </div>
+	
+	<!-- End dummy navbar -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
