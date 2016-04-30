@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="login">Login <span class="sr-only">(current)</span></a></li>
-		<li><a href="login">Register<span class="sr-only">(current)</span></a></li>
+		<li><a href="signup">Register<span class="sr-only">(current)</span></a></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">

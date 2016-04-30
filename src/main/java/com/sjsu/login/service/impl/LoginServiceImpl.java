@@ -96,7 +96,7 @@ public class LoginServiceImpl implements ILoginService {
 		boolean isInsert=false;
 		
 		
-		String insertTableSQL = "Insert into login (name, password) values (\""+ clientResDetails.getName() +"\",\"" + clientResDetails.getPassword() +"\")";
+		String insertTableSQL = "Insert into login (fname,email,contact,name, password) values (\""+clientResDetails.getFname()+"\",\""+clientResDetails.getEmail()+"\",\""+clientResDetails.getContact()+"\",\""+ clientResDetails.getName() +"\",\"" + clientResDetails.getPassword() +"\")";
 		try {
 			if(!(isUsernameUnique(clientResDetails.getName()))) {
 				isInsert=false;

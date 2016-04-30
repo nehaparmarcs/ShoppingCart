@@ -21,6 +21,10 @@
         <put-attribute name="title" value="Login Page" />
         <put-attribute name="body" value="/jsp/login.jsp" />
     </definition>
+    <definition name="signup" extends="base.definition">
+        <put-attribute name="title" value="Sign Up" />
+        <put-attribute name="body" value="/WEB-INF/jsp/signup.jsp" />
+    </definition>
     
     <definition name="search" extends="base.definition">
         <put-attribute name="title" value="Search Page" />
