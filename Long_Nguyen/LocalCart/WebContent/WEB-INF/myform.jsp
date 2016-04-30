@@ -34,5 +34,6 @@
 		<div style="color: red;">${errorMsg}</div>
 		<!--  end message-red -->
 	</c:if>
+	<a href="/viewCart">View Cart</a>
 </body>
 </html>
