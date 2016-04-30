@@ -12,7 +12,7 @@
 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 	<mvc:annotation-driven />
 	
-	 <context:component-scan base-package="com.sjsu.controller" />
+	 <context:component-scan base-package="com.sjsu.controller,com.sjsu.couch.repository" />
  
 	<bean id="viewResolver"
     class="org.springframework.web.servlet.view.UrlBasedViewResolver">

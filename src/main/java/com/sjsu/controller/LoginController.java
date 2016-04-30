@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ektorp.CouchDbConnector;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,12 +19,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sjsu.couch.model.Item;
+import com.sjsu.couch.repository.CatalogRepository;
 import com.sjsu.dao.login.LoginDAO;
 import com.sjsu.login.service.impl.LoginServiceImpl;
 import com.sjsu.model.UserRequest;
 
 @Controller
 public class LoginController {
+	
+	//Integrating with couch data for final integration.
+	@Autowired
+	CatalogRepository catalogRepo;
 	
 	LoginDAO req = new LoginDAO();
 	LoginServiceImpl loginImpl = new LoginServiceImpl();
@@ -60,7 +68,8 @@ public class LoginController {
 			
 			success = LoginServiceImpl.selectRecordFromDb(user.getName(),user.getPassword());
 			if(success) {
-				model.addObject("items", getItemList());
+				model.addObject("items",catalogRepo.getAll());
+				//model.addObject("items", getItemList());
 				return model;
 				
 			}

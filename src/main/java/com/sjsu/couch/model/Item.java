@@ -1,8 +1,13 @@
 package com.sjsu.couch.model;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.ektorp.support.CouchDbDocument;
 import org.ektorp.support.TypeDiscriminator;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+
+@JsonIgnoreProperties("typeName")
 public class Item  extends CouchDbDocument {
 
 	private static final long serialVersionUID = 1L;
@@ -17,6 +22,9 @@ public class Item  extends CouchDbDocument {
 	private int quantity;
 	private String category;
 	
+	public Item() {
+		super();
+	}
 	
 	
 	public Item(String name, String itemID, String desc, String imgPath, Float itemPrice, int quantity) {
@@ -28,9 +36,7 @@ public class Item  extends CouchDbDocument {
 		this.itemPrice = itemPrice;
 		this.quantity = quantity;
 	}
-	public Item() {
-		super();
-	}
+	
 	public String getImgPath() {
 		return imgPath;
 	}

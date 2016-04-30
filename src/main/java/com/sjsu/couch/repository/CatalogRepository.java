@@ -39,10 +39,7 @@ public class CatalogRepository extends CouchDbRepositorySupport<Item> {
 		return db.queryForPage(q, pr, Item.class);
 	}
 	
-	@GenerateView
-	public List<Item> findByTag(String tag) {
-		return queryView("by_tag", tag);
-	}
+	
 	
 	
 	

@@ -11,8 +11,8 @@
  <properties>
 		<ektorp.version>1.2.2</ektorp.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
-		<slf4j.version>1.5.11</slf4j.version>
-		<slf4j.12.version>1.5.11</slf4j.12.version>
+		<slf4j.version>1.6.1</slf4j.version>
+		<slf4j.12.version>1.6.1</slf4j.12.version>
 		<junit.version>4.8.1</junit.version>
 		<tiles.version>2.2.1</tiles.version>
 	</properties>
@@ -40,11 +40,17 @@
 	</build>
 	<dependencies>
 	
-	<dependency>
+		<dependency>
 			<groupId>org.ektorp</groupId>
 			<artifactId>org.ektorp</artifactId>
 			<version>${ektorp.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.ektorp</groupId>
+			<artifactId>org.ektorp.spring</artifactId>
+			<version>${ektorp.version}</version>
+		</dependency>
+		
 		
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -118,7 +124,34 @@
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
- 	
+ 		<dependency>
+			<groupId>javax.json</groupId>
+			<artifactId>javax.json-api</artifactId>
+			<version>1.0-b01</version>
+		</dependency>
+		
+				<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>1.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>1.18.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+            <version>1.18.1</version>
+        </dependency>
  	
  	<dependency>
 	<groupId>org.apache.tiles</groupId>
@@ -152,10 +185,12 @@
 			<version>5.1.6</version>
 		</dependency>
 		<dependency>
-    <groupId>org.codehaus.jackson</groupId>
-    <artifactId>jackson-mapper-asl</artifactId>
-    <version>1.7.1</version>
-</dependency> 
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-mapper-asl</artifactId>
+		    <version>1.8.6</version>
+		</dependency> 
+        
+         
          
 	</dependencies>
  
