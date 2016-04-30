@@ -7,13 +7,13 @@
 <style>.wraptocenter {
     display: table-cell;
     
-    width: 200px;
-    height: 100px;
-    border: 5px solid black;
-    min-height:300px;
-    min.width:300px;
-    margin: 2px solid white;
+    width: 80px;
+    height: 50px;
+    border: 5px solid gray;
+  min-height:90px;
     
+    margin: 4px solid white;
+    float: left;
 }
 .wraptocenter img { max-width: 190px; max-height: 190px; }
 .wraptoabc {
@@ -22,9 +22,9 @@
     width: 300px;
     height: 100px;
     border: 8px solid white;
-    min-height:300px;
-    min.width:300px;
-    margin: 5px;
+    
+    margin: 2px;
+    float: left;
     
 }</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -48,11 +48,11 @@
 		<!-- It will Link to details page on clicking item link -->
 		<div class="wraptocenter">
 			
-				<td colspan="2">
+				
 				<a href="">
 					<span class="pull-right inter_arrw"><img src="${item.imgPath}" alt="${item.desc}"/></span>
 					</a>
-				</td></div>
+				</div>
 				
 				<div class="wraptoabc">
 			
@@ -67,7 +67,7 @@
 				
 			
 				
-					<span>Quantity</span>
+					<span>Quantity:</span>
 				
 					<span>${item.quantity}</span>
 				
