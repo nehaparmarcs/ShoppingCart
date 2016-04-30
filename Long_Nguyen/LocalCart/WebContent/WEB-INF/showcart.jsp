@@ -6,24 +6,40 @@
 	src="<c:url value="/resources/jquery-1.12.3.min.js" />"></script>
 
 <script type="text/javascript">
-function RemoveItem(id) {
-	alert(id);
-	alert("in javascript RemoveItem: " + id);
+function RemoveItem(userid, id) {
 	$.ajax({ 
 	    url: "/removeItem", 
 	    type: 'POST', 
-	    dataType: 'json', 
-	    data: "{\"id\": \"" + id + "\"}",
 	    contentType: 'application/json',
-	    mimeType: 'application/json',
+	    data: "{\"userid\": \"" + userid + "\"" + ",\"id\": \"" + id + "\"}",
 	    success: function(data) { 
-	        alert("success");
+	    	document.open();
+	        document.write(data);
+	        document.close();
 	    },
 	    error:function(data,status,er) { 
 	        alert("er:"+er);
 	    }
 	});
 	
+}
+
+function UpdateItemQuantity(userid, id, sel) {
+	var quantity = sel.value;  
+	$.ajax({ 
+	    url: "/updateItemQuantity", 
+	    type: 'POST', 
+	    contentType: 'application/json',
+	    data: "{\"userid\": \"" + userid + "\"" + ",\"id\": \"" + id + "\"" + ",\"quantity\":" + quantity + "}",
+	    success: function(data) { 
+	    	document.open();
+	        document.write(data);
+	        document.close();
+	    },
+	    error:function(data,status,er) { 
+	        alert("er:"+er);
+	    }
+	});
 }
 </script>
 </head>
@@ -33,13 +49,22 @@ function RemoveItem(id) {
 			<tr>
 				<td>
 					<button type="button" class="removebutton"
-						onclick="RemoveItem(${item.id})">Delete</button>
+						onclick="RemoveItem('mark', ${item.id})">Delete</button>
 				</td>
-				<td>${item.toString()}</td>
+				<td>${item.name}</td>
+				<td>${item.desc}</td>
+				<td>${item.totalPrice}</td>
+				<td><select name="quantity" onchange="UpdateItemQuantity('mark', ${item.id}, this)">
+						<c:forEach var="num" items="${numberList}">
+							<option value="${num}"
+								${num == item.quantity ? 'selected="selected"' : ''}>${num}</option>
+						</c:forEach>
+				</select></td>
 
 			</tr>
 		</c:forEach>
-	</table>
 
+	</table>
+	Total: ${cart.total}
 </body>
 </html>

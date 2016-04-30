@@ -178,8 +178,9 @@ public class CartDBManager {
 		return cart;
 	}
 
-	public Cart releaseCartItem(String userId, CartItem item) {
-		System.out.println("Request release CartItem, userId: " + userId);
+	public Cart deleteCartItem(String userId, String id) {
+		System.out.println("Request delete CartItem, userId: " + userId
+				+ " itemid: " + id);
 		Cart cart = null;
 		// get the Cart from DB
 		cart = getCart(userId);
@@ -191,14 +192,45 @@ public class CartDBManager {
 				+ " Cart: " + cart.toString());
 		List<CartItem> dbItems = cart.getItemList();
 		for (CartItem dbItem : dbItems) {
-			if (item.getId().equals(dbItem.getId())) {
-				dbItem.setQuantity(dbItem.getQuantity() - item.getQuantity());
-				if (dbItem.getQuantity() <= 0) {
-					dbItems.remove(dbItem);
-				}
+			if (id.equals(dbItem.getId())) {
+				dbItems.remove(dbItem);
 				break;
 			}
 		}
+		// re-compute the Total
+		cart.computeTotal();
+		// store the Cart to DB again
+		storeCart(cart);
+		System.out.println("Cart in DB after update, userId: " + userId
+				+ " Cart: " + cart.toString());
+		return cart;
+	}
+
+	public Cart updateCartItem(String userId, String id, int quantity) {
+		// TODO Auto-generated method stub
+		System.out.println("Request update CartItem, userId: " + userId
+				+ ", id: " + id + ", quantity: " + quantity);
+		Cart cart = null;
+		// get the Cart from DB
+		cart = getCart(userId);
+		if (cart == null) {
+			System.out
+					.println("ERROR: updateCartItem item in an empty Cart!!!");
+			return cart;
+		}
+		System.out.println("Cart in DB before update, userId: " + userId
+				+ " Cart: " + cart.toString());
+		List<CartItem> dbItems = cart.getItemList();
+		for (CartItem dbItem : dbItems) {
+			if (id.equals(dbItem.getId())) {
+				dbItem.setQuantity(quantity);
+				dbItem.setTotalPrice(dbItem.getItemPrice()
+						* dbItem.getQuantity());
+				break;
+			}
+		}
+		// re-compute the Total
+		cart.computeTotal();
 		// store the Cart to DB again
 		storeCart(cart);
 		System.out.println("Cart in DB after update, userId: " + userId

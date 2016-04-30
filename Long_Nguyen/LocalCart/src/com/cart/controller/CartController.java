@@ -1,11 +1,14 @@
 package com.cart.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -69,14 +72,49 @@ public class CartController {
 		System.out.println("in viewCart mapping");
 		Cart cart = db.getCart("mark");
 		model.addAttribute("cart", cart);
+		initNumberList(model);
 		return "showcart";
 	}
 
-	@RequestMapping(value = "/removeItem", method = RequestMethod.POST, headers = { "Content-type=application/json" })
-	@ResponseBody
-	public JsonResponse addPerson(@RequestBody String itemID) {
-		System.out.println("RemoveItem: " + itemID);
-		return new JsonResponse("OK", "");
+	@RequestMapping(value = "/removeItem", method = RequestMethod.POST)
+	public String removeItem(@RequestBody String reqData, Model model) {
+		System.out.println("RemoveItem: " + reqData);
+		JSONObject jsonObject = new JSONObject(reqData);
+		String id = jsonObject.getString("id");
+		Cart cart = null;
+		cart = db.deleteCartItem("mark", id);
+		model.addAttribute("cart", cart);
+		initNumberList(model);
+		return "showcart";
+	}
+	
+	@RequestMapping(value = "/updateItemQuantity", method = RequestMethod.POST)
+	public String updateItemQuantity(@RequestBody String reqData, Model model) {
+		System.out.println("updateItemQuantity: " + reqData);
+		JSONObject jsonObject = new JSONObject(reqData);
+		String id = jsonObject.getString("id");
+		int quantity = jsonObject.getInt("quantity");
+		Cart cart = null;
+		cart = db.updateCartItem("mark", id, quantity);
+		model.addAttribute("cart", cart);
+		initNumberList(model);
+		return "showcart";
+	}
+	
+	private void initNumberList(Model model) {
+		// TODO Auto-generated method stub
+		List<Integer> numList = new ArrayList<Integer>();
+		numList.add(1);
+		numList.add(2);
+		numList.add(3);
+		numList.add(4);
+		numList.add(5);
+		numList.add(6);
+		numList.add(7);
+		numList.add(8);
+		numList.add(9);
+
+		model.addAttribute("numberList", numList);
 	}
 
 }
