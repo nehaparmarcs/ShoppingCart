@@ -15,6 +15,10 @@
 				<td><form:input type="text" path="name" /></td>
 			</tr>
 			<tr>
+				<th>Desc</th>
+				<td><form:input type="text" path="desc" /></td>
+			</tr>
+			<tr>
 				<th>itemPrice</th>
 				<td><form:input type="text" path="itemPrice" /></td>
 			</tr>
@@ -34,6 +38,7 @@
 		<div style="color: red;">${errorMsg}</div>
 		<!--  end message-red -->
 	</c:if>
-	<a href="/viewCart">View Cart</a>
+	<a href="/viewCart?userId=mark">View Cart</a>
+	<a href="/viewOrders?userId=mark">View Your Orders</a>
 </body>
 </html>

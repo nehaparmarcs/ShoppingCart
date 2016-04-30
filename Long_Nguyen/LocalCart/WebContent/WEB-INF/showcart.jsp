@@ -41,6 +41,23 @@ function UpdateItemQuantity(userid, id, sel) {
 	    }
 	});
 }
+
+function CheckOut(userid) {  
+	$.ajax({ 
+	    url: "/checkOut", 
+	    type: 'POST', 
+	    contentType: 'application/json',
+	    data: "{\"userid\": \"" + userid + "\"}",
+	    success: function(data) { 
+	    	document.open();
+	        document.write(data);
+	        document.close();
+	    },
+	    error:function(data,status,er) { 
+	        alert("er:"+er);
+	    }
+	});
+}
 </script>
 </head>
 <body>
@@ -54,7 +71,8 @@ function UpdateItemQuantity(userid, id, sel) {
 				<td>${item.name}</td>
 				<td>${item.desc}</td>
 				<td>${item.totalPrice}</td>
-				<td><select name="quantity" onchange="UpdateItemQuantity('mark', ${item.id}, this)">
+				<td><select name="quantity"
+					onchange="UpdateItemQuantity('mark', ${item.id}, this)">
 						<c:forEach var="num" items="${numberList}">
 							<option value="${num}"
 								${num == item.quantity ? 'selected="selected"' : ''}>${num}</option>
@@ -65,6 +83,13 @@ function UpdateItemQuantity(userid, id, sel) {
 		</c:forEach>
 
 	</table>
-	Total: ${cart.total}
+	<div>Total: ${cart.total}</div>
+
+	<div>
+		<button type="button" onClick="CheckOut('mark')"
+			${cart.itemList.size() == 0 ? 'disabled' : ''}>Checkout</button>
+	</div>
+
+
 </body>
 </html>
