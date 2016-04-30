@@ -186,5 +186,17 @@ public class CartManager implements ShoppingCartConstant {
 				+ " Cart: " + cart.toString());
 		return cart;
 	}
+	
+	public Cart mergeCart(String anonymousUserId, String userId) {
+		Cart cart = null;
+		Cart anoCart = anonymousCartMap.get(anonymousUserId);
+		if (anoCart != null) {
+			for (CartItem item : anoCart.getItemList()) {
+				db.addCartItem(userId, item);	
+			}
+			anonymousCartMap.remove(anonymousUserId);
+		}
+		return cart;
+	}
 
 }
