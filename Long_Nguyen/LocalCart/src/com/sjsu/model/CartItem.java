@@ -64,21 +64,21 @@ public class CartItem implements Serializable {
 
 	@Override
 	public String toString() {
-		// return "CartItem [itemName=" + name + ", itemID=" + id + ", desc="
-		// + desc + ", itemPrice=" + itemPrice + ", quantity=" + quantity
-		// + ", totalPrice=" + totalPrice + "]";
-		return "{\"name\":\"" + name + "\"" + ",\"id\":\"" + id + "\""
-				+ ",\"desc\":\"" + desc + "\"" + ",\"itemPrice\":" + itemPrice
-				+ ",\"quantity\":" + quantity + ",\"totalPrice\":" + totalPrice
-				+ "}";
-
-	}
-
-	public String toJson() {
-		return "{\"name\":\"" + name + "\"" + ",\"id\":\"" + id + "\""
-				+ ",\"desc\":\"" + desc + "\"" + ",\"itemPrice\":" + itemPrice
-				+ ",\"quantity\":" + quantity + ",\"totalPrice\":" + totalPrice
-				+ "}";
+		return "CartItem [itemName=" + name + ", itemID=" + id + ", desc="
+				+ desc + ", itemPrice=" + itemPrice + ", quantity=" + quantity
+				+ ", totalPrice=" + totalPrice + "]";
+//		return "{\"name\":\"" + name + "\"" + ",\"id\":\"" + id + "\""
+//				+ ",\"desc\":\"" + desc + "\"" + ",\"itemPrice\":" + itemPrice
+//				+ ",\"quantity\":" + quantity + ",\"totalPrice\":" + totalPrice
+//				+ "}";
+//
+//	}
+//
+//	public String toJson() {
+//		return "{\"name\":\"" + name + "\"" + ",\"id\":\"" + id + "\""
+//				+ ",\"desc\":\"" + desc + "\"" + ",\"itemPrice\":" + itemPrice
+//				+ ",\"quantity\":" + quantity + ",\"totalPrice\":" + totalPrice
+//				+ "}";
 	}
 
 }

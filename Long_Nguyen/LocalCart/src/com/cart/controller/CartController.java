@@ -80,9 +80,10 @@ public class CartController {
 	public String removeItem(@RequestBody String reqData, Model model) {
 		System.out.println("RemoveItem: " + reqData);
 		JSONObject jsonObject = new JSONObject(reqData);
+		String userid = jsonObject.getString("userid");
 		String id = jsonObject.getString("id");
 		Cart cart = null;
-		cart = db.deleteCartItem("mark", id);
+		cart = db.deleteCartItem(userid, id);
 		model.addAttribute("cart", cart);
 		initNumberList(model);
 		return "showcart";
@@ -92,10 +93,11 @@ public class CartController {
 	public String updateItemQuantity(@RequestBody String reqData, Model model) {
 		System.out.println("updateItemQuantity: " + reqData);
 		JSONObject jsonObject = new JSONObject(reqData);
+		String userid = jsonObject.getString("userid");
 		String id = jsonObject.getString("id");
 		int quantity = jsonObject.getInt("quantity");
 		Cart cart = null;
-		cart = db.updateCartItem("mark", id, quantity);
+		cart = db.updateCartItem(userid, id, quantity);
 		model.addAttribute("cart", cart);
 		initNumberList(model);
 		return "showcart";
