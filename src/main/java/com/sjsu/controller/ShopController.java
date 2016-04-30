@@ -44,11 +44,18 @@ public class ShopController {
 		return "browse";
 	}
 	
+	@RequestMapping( value = "addToCart", method = RequestMethod.GET)
+	public ModelAndView addToCart() {
+		return new ModelAndView("addItem", "item", new Item());
+	}
+	
+	
+	
 	// ++ ND
 	
 	
 	@RequestMapping( value = "newItem", method = RequestMethod.GET)
-	public ModelAndView newPost() {
+	public ModelAndView newPost(@ModelAttribute("item")Item item) {
 		return new ModelAndView("addItem", "item", new Item());
 	}
 	
@@ -148,7 +155,7 @@ public class ShopController {
 			
 			try {
 				
-				success = LoginServiceImpl.selectRecordFromDb(delItem.getItemID());
+				//success = LoginServiceImpl.selectRecordFromDb(delItem.getItemID());
 				if(success) {
 					model.addObject("items", cont.getItemList());
 					return model;
@@ -159,7 +166,7 @@ public class ShopController {
 				
 				}
 				
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			

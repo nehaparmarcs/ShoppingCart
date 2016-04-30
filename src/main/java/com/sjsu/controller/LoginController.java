@@ -83,7 +83,9 @@ public class LoginController {
 		
 		items.add(new Item("T-shirt", "shirt-id", "Its a big tee", "imgPath", (float) 7.0,8));
 		items.add(new Item("Reebok Tee", "rbkId1", "Play Dry", "imgPath", (float) 700.0,100));
-		items.add(new Item("Another Reebok tee", "rb2", "Paly Ice", "imgPath", (float) 300.0,50));
+		items.add(new Item("Another Reebok tee", "rb2", "Play Ice", "imgPath", (float) 300.0,50));
+		items.add(new Item("Puma tee", "rb3", "Play Ice", "imgPath", (float) 300.0,50));
+		items.add(new Item("Another Reebok tee", "rb4", "Paly Ice", "imgPath", (float) 300.0,50));
 		return items;
 	}
 	
