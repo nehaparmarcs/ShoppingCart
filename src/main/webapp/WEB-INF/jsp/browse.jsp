@@ -49,7 +49,7 @@
 		<div class="wraptocenter">
 			
 				
-				<a href="">
+				<a class="navbar-brand" href="details?itemID=${item.itemID}">
 					<span class="pull-right inter_arrw"><img src="${item.imgPath}" alt="${item.desc}"/></span>
 					</a>
 				</div>
