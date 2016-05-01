@@ -11,17 +11,42 @@
 <c:out value="Your Online shop"/>
 <form action="login1" method="post">
 <c:set var="item" value="${item}" />
-
+<!--  
 ${item.imgPath}
 ${item.desc}
 ${item.itemPrice}
-${item.quantity}
+${item.quantity} [end]-->
 
-<input class="btn btn-lg btn-success btn-block" type="submit" value="Add To Cart">
-<input class="btn btn-lg btn-success btn-block" type="submit" value="Buy">
+
 
 </form>
-
+<div class="container">
+	
+		<div class="row marginTop">
+		
+			<div class="col-md-6 marginTop">
+				<h2 class="center"> <span class="glyphicon glyphicon-fire"></span>${item.desc}</h2>
+				<img src="${item.imgPath}" />
+				<p class="center bold"></p>
+				
+				
+			</div>
+		<!--	<div class="row marginTop"> -->
+				<div class="col-md-4 marginTop">
+						<h1>${item.desc}</h1>
+						<h2>Details:</h2>
+					<p>//</p>	
+					<h3> List Price:</h3><h3> ${item.itemPrice}</h3>
+					<h3>Quantity</h3><h3>${item.quantity}</h3>
+					<p><a href="#" class="btn btn-primary" role="button">View More Details</a><a href="#" class="btn btn-success" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a> </p>
+				</div>
+				
+		<!-- </div> -->
+			
+		
+		</div>
+		
+	</div>
 
 </body>
 </html>
