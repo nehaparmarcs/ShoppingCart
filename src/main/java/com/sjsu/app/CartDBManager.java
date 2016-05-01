@@ -38,39 +38,42 @@ public class CartDBManager {
 
 	private void initDBConf() {
 		// TODO Auto-generated method stub
-		Properties prop = new Properties();
-		InputStream input = null;
-		String configPath = "/Users/longnguyen/riak.conf";
-		System.out.println("config path: " + configPath);
-		try {
-
-			input = new FileInputStream(configPath);
-
-			// load a properties file
-			prop.load(input);
-			// int numOfNode =
-			// Integer.parseInt(prop.getProperty("num_of_node"));
-			// System.out.println("num_of_node = " + numOfNode);
-
-			String riakIps = prop.getProperty("riak_ips");
-			String[] ips = null;
-			if (riakIps != null) {
-				ips = riakIps.split(",");
-			}
-			if (ips != null) {
-				for (String s : ips) {
-					System.out.println("riak_ip = " + s);
-					nodes.add(s);
-				}
-			}
-
-			database = prop.getProperty("cart_database");
-			System.out.println("database = " + database);
-			port = Integer.parseInt(prop.getProperty("port"));
-			System.out.println("port = " + port);
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		// Properties prop = new Properties();
+		// InputStream input = null;
+		// String configPath = "/Users/longnguyen/riak.conf";
+		// System.out.println("config path: " + configPath);
+		// try {
+		//
+		// input = new FileInputStream(configPath);
+		//
+		// // load a properties file
+		// prop.load(input);
+		// // int numOfNode =
+		// // Integer.parseInt(prop.getProperty("num_of_node"));
+		// // System.out.println("num_of_node = " + numOfNode);
+		//
+		// String riakIps = prop.getProperty("riak_ips");
+		// String[] ips = null;
+		// if (riakIps != null) {
+		// ips = riakIps.split(",");
+		// }
+		// if (ips != null) {
+		// for (String s : ips) {
+		// System.out.println("riak_ip = " + s);
+		// nodes.add(s);
+		// }
+		// }
+		//
+		// database = prop.getProperty("cart_database");
+		// System.out.println("database = " + database);
+		// port = Integer.parseInt(prop.getProperty("port"));
+		// System.out.println("port = " + port);
+		// } catch (IOException ex) {
+		// ex.printStackTrace();
+		// }
+		nodes.add("54.191.155.252");
+		database = "cart";
+		port = 8087;
 	}
 
 	public Cart getCart(String userId) {
@@ -82,6 +85,11 @@ public class CartDBManager {
 		try {
 			response = riak.execute(fv);
 			cart = response.getValue(Cart.class);
+			if (cart == null) {
+				cart = new Cart();
+				cart.setUserId(userId);
+				storeCart(cart);
+			}
 		} catch (UnresolvedConflictException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
@@ -91,6 +99,9 @@ public class CartDBManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		cart.computeTotal();
+
 		System.out.println("Response get Cart, userId: " + userId + " cart: "
 				+ (cart == null ? "null" : cart.toString()));
 		return cart;
@@ -150,12 +161,16 @@ public class CartDBManager {
 			if (item.getId().equals(dbItem.getId())) {
 				isContain = true;
 				dbItem.setQuantity(dbItem.getQuantity() + item.getQuantity());
+				dbItem.setTotalPrice(dbItem.getItemPrice()
+						* dbItem.getQuantity());
 			}
 		}
 		if (!isContain) {
+			item.setTotalPrice(item.getItemPrice() * item.getQuantity());
 			dbItems.add(item);
 		}
-
+		// re-compute the Total
+		cart.computeTotal();
 		// store the Cart to DB again
 		storeCart(cart);
 		System.out.println("Cart in DB after update, userId: " + userId
@@ -163,8 +178,9 @@ public class CartDBManager {
 		return cart;
 	}
 
-	public Cart releaseCartItem(String userId, CartItem item) {
-		System.out.println("Request release CartItem, userId: " + userId);
+	public Cart deleteCartItem(String userId, String id) {
+		System.out.println("Request delete CartItem, userId: " + userId
+				+ " itemid: " + id);
 		Cart cart = null;
 		// get the Cart from DB
 		cart = getCart(userId);
@@ -176,14 +192,45 @@ public class CartDBManager {
 				+ " Cart: " + cart.toString());
 		List<CartItem> dbItems = cart.getItemList();
 		for (CartItem dbItem : dbItems) {
-			if (item.getId().equals(dbItem.getId())) {
-				dbItem.setQuantity(dbItem.getQuantity() - item.getQuantity());
-				if (dbItem.getQuantity() <= 0) {
-					dbItems.remove(dbItem);
-				}
+			if (id.equals(dbItem.getId())) {
+				dbItems.remove(dbItem);
 				break;
 			}
 		}
+		// re-compute the Total
+		cart.computeTotal();
+		// store the Cart to DB again
+		storeCart(cart);
+		System.out.println("Cart in DB after update, userId: " + userId
+				+ " Cart: " + cart.toString());
+		return cart;
+	}
+
+	public Cart updateCartItem(String userId, String id, int quantity) {
+		// TODO Auto-generated method stub
+		System.out.println("Request update CartItem, userId: " + userId
+				+ ", id: " + id + ", quantity: " + quantity);
+		Cart cart = null;
+		// get the Cart from DB
+		cart = getCart(userId);
+		if (cart == null) {
+			System.out
+					.println("ERROR: updateCartItem item in an empty Cart!!!");
+			return cart;
+		}
+		System.out.println("Cart in DB before update, userId: " + userId
+				+ " Cart: " + cart.toString());
+		List<CartItem> dbItems = cart.getItemList();
+		for (CartItem dbItem : dbItems) {
+			if (id.equals(dbItem.getId())) {
+				dbItem.setQuantity(quantity);
+				dbItem.setTotalPrice(dbItem.getItemPrice()
+						* dbItem.getQuantity());
+				break;
+			}
+		}
+		// re-compute the Total
+		cart.computeTotal();
 		// store the Cart to DB again
 		storeCart(cart);
 		System.out.println("Cart in DB after update, userId: " + userId
