@@ -6,12 +6,20 @@ import java.util.List;
 
 public class Order {
 	private String orderNum;
-	private int orderStatus;
 	private String orderDate;
-	private List<Item> items;
+	private List<CartItem> items;
+	private double total;
 	
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
 	public Order() {
-		items = new LinkedList<Item>();
+		items = new LinkedList<CartItem>();
 	}
 	
 	public String getOrderNum() {
@@ -20,12 +28,7 @@ public class Order {
 	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
 	}
-	public int getOrderStatus() {
-		return orderStatus;
-	}
-	public void setOrderStatus(int orderStatus) {
-		this.orderStatus = orderStatus;
-	}
+
 	public String getOrderDate() {
 		return orderDate;
 	}
@@ -33,20 +36,20 @@ public class Order {
 		this.orderDate = orderDate;
 	}
 	
-	public List<Item> getItems() {
+	public List<CartItem> getItems() {
 		return items;
 	}
 
-	public void setItems(List<Item> items) {
+	public void setItems(List<CartItem> items) {
 		this.items = items;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("Order: orderNum=" + orderNum + " orderStatus= " + orderStatus + " orderDate=" + orderDate + " [items=");
+		str.append("Order: orderNum=" + orderNum + " orderDate=" + orderDate + " [items=");
 		for (int i = 0; i < items.size(); i++) {
-			Item c = items.get(i);
+			CartItem c = items.get(i);
 			str.append(c.toString());
 			if (i < items.size() - 1) {
 				str.append(",");
