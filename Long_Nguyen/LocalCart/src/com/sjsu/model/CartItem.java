@@ -13,7 +13,7 @@ public class CartItem implements Serializable {
 	private double itemPrice;
 	private int quantity;
 	private double totalPrice;
-
+	private String imgPath;
 	public String getName() {
 		return name;
 	}
@@ -61,7 +61,13 @@ public class CartItem implements Serializable {
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+	public String getImgPath() {
+		return imgPath;
+	}
 
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
 	@Override
 	public String toString() {
 		return "CartItem [itemName=" + name + ", itemID=" + id + ", desc="

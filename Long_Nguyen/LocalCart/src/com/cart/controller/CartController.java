@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sjsu.app.CartDBManager;
 import com.sjsu.app.CartManager;
 import com.sjsu.app.OrderDBManager;
+import com.sjsu.app.UserIdMap;
 import com.sjsu.model.Cart;
 import com.sjsu.model.CartItem;
 import com.sjsu.model.JsonResponse;
@@ -76,6 +77,38 @@ public class CartController implements ShoppingCartConstant{
 			return "myform";
 		}
 	}
+	
+	@RequestMapping(value = "/addItemtoCart", method = RequestMethod.POST)
+	@ResponseBody
+	public String addItemtoCart(@RequestBody String reqData, Model model) {
+		System.out.println("addItemtoCart: " + reqData);
+		JSONObject jsonObject = new JSONObject(reqData);
+		String userid = jsonObject.getString("userid");
+		String id = jsonObject.getString("id");
+		String name = jsonObject.getString("name");
+		String desc = jsonObject.getString("desc");
+		double itemPrice = jsonObject.getDouble("itemPrice");
+		int quantity = jsonObject.getInt("quantity");
+		String imgPath = jsonObject.getString("imgPath");
+		CartItem item = new CartItem();
+		item.setId(id);
+		item.setName(name);
+		item.setDesc(desc);
+		item.setItemPrice(itemPrice);
+		item.setQuantity(quantity);
+		item.setImgPath(imgPath);
+//		Cart cart;
+//		String realUserId = UserIdMap.getInstance().getUserMapping(userid);
+//		if (realUserId == null) {
+//			cart = cartMgr.addCartItem(userid, ANONYMOUS_USER_TYPE, item);
+//		} else {
+//			cart = cartMgr.addCartItem(realUserId, IDENTIFIED_USER_TYPE, item);
+//		}
+		Cart cart = cartMgr.addCartItem(userid, IDENTIFIED_USER_TYPE, item);
+		
+		
+		return "Add Item to Cart successfully!!!";
+	}
 
 	@RequestMapping(value = "/viewCart", method = RequestMethod.GET)
 	public String viewCart(@RequestParam String userId, Model model) {
@@ -98,7 +131,7 @@ public class CartController implements ShoppingCartConstant{
 		cart = cartMgr.deleteCartItem(userid, IDENTIFIED_USER_TYPE, id);
 		model.addAttribute("cart", cart);
 		initNumberList(model);
-		return "showcart";
+		return "subshowcart";
 	}
 	
 	@RequestMapping(value = "/updateItemQuantity", method = RequestMethod.POST)
@@ -166,5 +199,6 @@ public class CartController implements ShoppingCartConstant{
 
 		model.addAttribute("numberList", numList);
 	}
+	
 
 }

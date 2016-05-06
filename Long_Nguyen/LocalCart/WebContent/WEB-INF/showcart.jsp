@@ -13,9 +13,10 @@ function RemoveItem(userid, id) {
 	    contentType: 'application/json',
 	    data: "{\"userid\": \"" + userid + "\"" + ",\"id\": \"" + id + "\"}",
 	    success: function(data) { 
-	    	document.open();
-	        document.write(data);
-	        document.close();
+	    	$(document).ready(function(){
+	    		alert(data);
+	    		$("#carttable").html(data);
+	    	});
 	    },
 	    error:function(data,status,er) { 
 	        alert("er:"+er);
@@ -61,35 +62,36 @@ function CheckOut(userid) {
 </script>
 </head>
 <body>
-	<table>
-		<c:forEach items="${cart.itemList}" var="item">
-			<tr>
-				<td>
-					<button type="button" class="removebutton"
-						onclick="RemoveItem('mark', ${item.id})">Delete</button>
-				</td>
-				<td>${item.name}</td>
-				<td>${item.desc}</td>
-				<td>${item.totalPrice}</td>
-				<td><select name="quantity"
-					onchange="UpdateItemQuantity('mark', ${item.id}, this)">
-						<c:forEach var="num" items="${numberList}">
-							<option value="${num}"
-								${num == item.quantity ? 'selected="selected"' : ''}>${num}</option>
-						</c:forEach>
-				</select></td>
+	<div id="carttable">
+		<table>
+			<c:forEach items="${cart.itemList}" var="item">
+				<tr>
+					<td>
+						<button type="button" class="removebutton"
+							onclick="RemoveItem('mark', ${item.id})">Delete</button>
+					</td>
+					<td>${item.name}</td>
+					<td>${item.desc}</td>
+					<td>${item.totalPrice}</td>
+					<td><select name="quantity"
+						onchange="UpdateItemQuantity('mark', ${item.id}, this)">
+							<c:forEach var="num" items="${numberList}">
+								<option value="${num}"
+									${num == item.quantity ? 'selected="selected"' : ''}>${num}</option>
+							</c:forEach>
+					</select></td>
 
-			</tr>
-		</c:forEach>
+				</tr>
+			</c:forEach>
 
-	</table>
-	<div>Total: ${cart.total}</div>
+		</table>
+		<div>Total: ${cart.total}</div>
 
-	<div>
-		<button type="button" onClick="CheckOut('mark')"
-			${cart.itemList.size() == 0 ? 'disabled' : ''}>Checkout</button>
+		<div>
+			<button type="button" onClick="CheckOut('mark')"
+				${cart.itemList.size() == 0 ? 'disabled' : ''}>Checkout</button>
+		</div>
+
 	</div>
-
-
 </body>
 </html>
