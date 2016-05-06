@@ -14,7 +14,7 @@
 	
 	<util:properties id="couchdbProperties" location="classpath:/couchdb.properties"/>
 
-	<couchdb:database id="shoppingCartDatabase" name="Items" url="http://localhost:5984"/>
+	<couchdb:database id="shoppingCartDatabase" name="Items" url="http://54.186.26.179:5984"/>
 	<!-- Removed Redis configuration -->
 
 </beans>
