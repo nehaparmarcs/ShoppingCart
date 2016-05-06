@@ -13,7 +13,7 @@ import java.sql.Statement;
 public class LoginServiceImpl implements ILoginService {
 
 	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/CMPE281";
+	private static final String DB_CONNECTION = "jdbc:mysql://54.191.43.78:3306/CMPE281";
 	private static final String DB_USER = "root";
 	private static final String DB_PASSWORD = "root";
 	

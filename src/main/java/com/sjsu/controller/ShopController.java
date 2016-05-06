@@ -57,7 +57,7 @@ public class ShopController {
 		return new ModelAndView("addItem", "item", new Item());
 	}
 	
-	@RequestMapping( value = "addItem", method = RequestMethod.POST)
+	@RequestMapping( value = "addItem1", method = RequestMethod.POST)
 	public ModelAndView submitPost(@ModelAttribute("item") Item item) {
 		if (item.isNew()) {
 			item.setId(createId(item.getItemID()));
