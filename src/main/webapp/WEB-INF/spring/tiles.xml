@@ -50,5 +50,31 @@
         <put-attribute name="body" value="/WEB-INF/jsp/register.jsp" />
     </definition>
     
+     <definition name="showcart" extends="base.definition">
+        <put-attribute name="title" value="Detail Page" />
+        <put-attribute name="body" value="/WEB-INF/jsp/showcart.jsp" />
+    </definition>
+    <definition name="viewOrders" extends="base.definition">
+        <put-attribute name="title" value="Detail Page" />
+        <put-attribute name="body" value="/WEB-INF/jsp/showorder.jsp" />
+    </definition>
+    <definition name="orderdetail" extends="base.definition">
+        <put-attribute name="title" value="Detail Page" />
+        <put-attribute name="body" value="/WEB-INF/jsp/orderdetail.jsp" />
+    </definition>
+    <definition name="orderconfirm" extends="base.definition">
+        <put-attribute name="title" value="Detail Page" />
+        <put-attribute name="body" value="/WEB-INF/jsp/orderconfirm.jsp" />
+    </definition>
+    <definition name="subshowcart" extends="base.definition">
+        <put-attribute name="title" value="Detail Page" />
+        <put-attribute name="body" value="/WEB-INF/jsp/subshowcart.jsp" />
+    </definition>
+    
+     <!--  definition name="landingPage" extends="base.definition">
+        <put-attribute name="title" value="Detail Page" />
+        <put-attribute name="body" value="/WEB-INF/jsp/landingPage.jsp" />
+    </definition-->
+    
  
 </tiles-definitions>

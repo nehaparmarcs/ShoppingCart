@@ -16,6 +16,8 @@
       <ul class="nav navbar-nav">
         <li><a href="login">Login <span class="sr-only">(current)</span></a></li>
 		<li><a href="signup">Register<span class="sr-only">(current)</span></a></li>
+		
+		<li><a href="viewCart?userId=mark">View Cart <span id="cartCount"></span><span class="sr-only">(current)</span></a></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">

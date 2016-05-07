@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sjsu.couch.model.Item;
@@ -25,6 +26,7 @@ import com.sjsu.login.service.impl.LoginServiceImpl;
 import com.sjsu.model.UserRequest;
 
 @Controller
+@SessionAttributes("items")
 public class LoginController {
 	
 	//Integrating with couch data for final integration.
@@ -33,6 +35,11 @@ public class LoginController {
 	
 	LoginDAO req = new LoginDAO();
 	LoginServiceImpl loginImpl = new LoginServiceImpl();
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String redirect() {
+		return "redirect:login";
+	}
 	
 	@RequestMapping(value="login")
      public ModelAndView home() {

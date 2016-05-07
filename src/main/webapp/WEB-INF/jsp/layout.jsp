@@ -14,8 +14,16 @@
   <title><tiles:getAsString name="title"/></title>
   <style type="text/css">
         a.bg-primary{padding:15px 10px;}
-        a.bg-primary:hover,a.bg-primary:focus{color:white;}
+        a.bg-primary:hover,a.bg-primary:focus{color:yellow;}
         .tagline{margin-bottom:100px;}
+        .jumbotron{background-color: #0B2F3A!important;}
+        .jumbotron h2{
+    color: #EFFBF8!important;
+}
+
+.jumbotron p{
+    color: #fff;
+}
     </style> 
 </head>
 <body>

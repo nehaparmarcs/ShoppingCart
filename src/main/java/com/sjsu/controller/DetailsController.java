@@ -9,20 +9,30 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sjsu.couch.model.Item;
 import com.sjsu.dao.login.LoginDAO;
 import com.sjsu.login.service.impl.LoginServiceImpl;
+import com.sjsu.model.CartItem;
 
 @Controller
+@SessionAttributes("items")
 public class DetailsController {
 
 	@RequestMapping(value="details")
-    public ModelAndView home(@RequestParam(value = "itemID", required = false) String itemID) {
+    public ModelAndView home(@RequestParam(value = "itemID", required = false) String itemID,
+    		@ModelAttribute("items")ArrayList<Item> items) {
+		Item detailItem = new Item() ;
+		for(Item item: items){
+			if(itemID.equals(item.getItemID())){
+				detailItem = item;
+			}
+		}
 		
-		ModelAndView modelandView = new ModelAndView("detailsPage", "item", getItem());
-		modelandView.addObject("item", getItem());
+		ModelAndView modelandView = new ModelAndView("detailsPage", "commandItem", new CartItem());
+		modelandView.addObject("detailItem", detailItem);
 		return modelandView;
 		
     }

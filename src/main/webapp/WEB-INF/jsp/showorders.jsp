@@ -20,7 +20,7 @@
 					<tr>
 						<td>Date ${order.orderDate }</td>
 						<td>ORDER# <a
-							href="/orderDetail?userId=mark&orderNum=${order.orderNum}">${order.orderNum}</a></td>
+							href="orderDetail?userId=mark&orderNum=${order.orderNum}">${order.orderNum}</a></td>
 					</tr>
 				</c:forEach>
 			</table>

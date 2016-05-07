@@ -41,7 +41,7 @@
 <h1>Add New Item</h1>
 
 
-<form:form modelAttribute="item"  method="POST" action="addItem">
+<form:form modelAttribute="item"  method="POST" action="addItem1">
 	<table>
 	
 		
@@ -58,6 +58,10 @@
 		<tr>
 			<td><form:label path="name">Item Name:</form:label></td>
 			<td><form:input path="name"/></td>
+		</tr>
+		<tr>
+			<td><form:label path="itemPrice">Item Price:</form:label></td>
+			<td><form:input path="itemPrice"/></td>
 		</tr>
 		<tr>
 			<td><form:label path="quantity">Quantity:</form:label></td>

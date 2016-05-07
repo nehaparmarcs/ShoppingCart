@@ -7,6 +7,6 @@
 
 </head>
 <body>
-Your ORDER# <a href="/orderDetail?userId=mark&orderNum=${order.orderNum}">${order.orderNum}</a> has been placed
+Your ORDER# <a href="orderDetail?userId=mark&orderNum=${order.orderNum}">${order.orderNum}</a> has been placed successfully !!!
 </body>
 </html>

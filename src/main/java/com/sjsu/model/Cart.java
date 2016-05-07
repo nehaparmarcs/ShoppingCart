@@ -52,6 +52,8 @@ public class Cart {
 			total += ci.getTotalPrice();
 		}
 	}
+	
+	
 
 	@Override
 	public String toString() {

@@ -8,11 +8,15 @@
 <script type="text/javascript">
 function RemoveItem(userid, id) {
 	$.ajax({ 
-	    url: "/removeItem", 
+	    url: "removeItem", 
 	    type: 'POST', 
 	    contentType: 'application/json',
 	    data: "{\"userid\": \"" + userid + "\"" + ",\"id\": \"" + id + "\"}",
 	    success: function(data) { 
+	    	/* $(document).ready(function(){
+	    		//alert(data);
+	    		$("#carttable").html(data);
+	    	}); */
 	    	document.open();
 	        document.write(data);
 	        document.close();
@@ -27,7 +31,7 @@ function RemoveItem(userid, id) {
 function UpdateItemQuantity(userid, id, sel) {
 	var quantity = sel.value;  
 	$.ajax({ 
-	    url: "/updateItemQuantity", 
+	    url: "updateItemQuantity", 
 	    type: 'POST', 
 	    contentType: 'application/json',
 	    data: "{\"userid\": \"" + userid + "\"" + ",\"id\": \"" + id + "\"" + ",\"quantity\":" + quantity + "}",
@@ -44,7 +48,7 @@ function UpdateItemQuantity(userid, id, sel) {
 
 function CheckOut(userid) {  
 	$.ajax({ 
-	    url: "/checkOut", 
+	    url: "checkOut", 
 	    type: 'POST', 
 	    contentType: 'application/json',
 	    data: "{\"userid\": \"" + userid + "\"}",
@@ -61,35 +65,36 @@ function CheckOut(userid) {
 </script>
 </head>
 <body>
-	<table>
-		<c:forEach items="${cart.itemList}" var="item">
-			<tr>
-				<td>
-					<button type="button" class="removebutton"
-						onclick="RemoveItem('mark', ${item.id})">Delete</button>
-				</td>
-				<td>${item.name}</td>
-				<td>${item.desc}</td>
-				<td>${item.totalPrice}</td>
-				<td><select name="quantity"
-					onchange="UpdateItemQuantity('mark', ${item.id}, this)">
-						<c:forEach var="num" items="${numberList}">
-							<option value="${num}"
-								${num == item.quantity ? 'selected="selected"' : ''}>${num}</option>
-						</c:forEach>
-				</select></td>
+	<div id="carttable">
+		<table>
+			<c:forEach items="${cart.itemList}" var="item">
+				<tr>
+					<td>
+						<button type="button" class="removebutton"
+							onclick="RemoveItem('mark', ${item.id})">Delete</button>
+					</td>
+					<td>${item.name}</td>
+					<td>${item.desc}</td>
+					<td>${item.totalPrice}</td>
+					<td><select name="quantity"
+						onchange="UpdateItemQuantity('mark', ${item.id}, this)">
+							<c:forEach var="num" items="${numberList}">
+								<option value="${num}"
+									${num == item.quantity ? 'selected="selected"' : ''}>${num}</option>
+							</c:forEach>
+					</select></td>
 
-			</tr>
-		</c:forEach>
+				</tr>
+			</c:forEach>
 
-	</table>
-	<div>Total: ${cart.total}</div>
+		</table>
+		<div>Total: ${cart.total}</div>
 
-	<div>
-		<button type="button" onClick="CheckOut('mark')"
-			${cart.itemList.size() == 0 ? 'disabled' : ''}>Checkout</button>
+		<div>
+			<button type="button" onClick="CheckOut('mark')"
+				${cart.itemList.size() == 0 ? 'disabled' : ''}>Checkout</button>
+		</div>
+
 	</div>
-
-
 </body>
 </html>
